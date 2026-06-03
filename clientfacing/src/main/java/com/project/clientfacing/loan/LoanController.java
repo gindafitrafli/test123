@@ -23,7 +23,6 @@ public class LoanController {
 
     @GetMapping("/loan/{loanId}")
     SubmitLoanDto getLoan(@PathVariable("loanId") String loanId) {
-
         return loanService.getLoan(loanId);
     }
 }

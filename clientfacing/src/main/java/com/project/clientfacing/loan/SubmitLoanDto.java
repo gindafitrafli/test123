@@ -6,9 +6,9 @@ import lombok.Builder;
 public record SubmitLoanDto(
         String customerName,
         String customerContact,
-        String customerID,
+        String customerId,
         String idType,
-        String loanAmount,
+        Integer loanAmount,
         String loanType,
         String loanNumber
 ) {

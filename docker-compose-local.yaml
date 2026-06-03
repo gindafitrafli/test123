@@ -1,0 +1,57 @@
+name: test123
+services:
+
+  client-facing:
+    build:
+      context: ./clientfacing
+      dockerfile: Dockerfile
+    container_name: client-facing
+    depends_on:
+      - client-facing-db
+    environment:
+      - SERVER_PORT=8080
+#      - POSTGRES_USER=$YOUR_USERNAME
+#      - POSTGRES_PASSWORD=$YOUR_PASSWORD
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/$YOUR_DB_NAME
+#      - SPRING_DATASOURCE_USERNAME=$YOUR_USERNAME
+#      - SPRING_DATASOURCE_PASSWORD=$YOUR_PASSWORD
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+    ports:
+      - "8080:8080"
+
+#  employee-facing:
+#    build:
+#      context: .
+#    container_name: client-facing
+#    depends_on:
+#      - db
+#    environment:
+#      - POSTGRES_USER=$YOUR_USERNAME
+#      - POSTGRES_PASSWORD=$YOUR_PASSWORD
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/$YOUR_DB_NAME
+#      - SPRING_DATASOURCE_USERNAME=$YOUR_USERNAME
+#      - SPRING_DATASOURCE_PASSWORD=$YOUR_PASSWORD
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#
+#    ports:
+#      - "$LOCAL_PORT:$DOCKER_PORT"
+
+  client-facing-db:
+    image: postgres
+    container_name: client-facing-db
+    environment:
+      - POSTGRES_USER=client_db
+      - POSTGRES_PASSWORD=client_db
+    ports:
+      - "5432:5432"
+
+#  employee-facing-db:
+#    image: postgres
+#    container_name: employee-facing-db
+#    environment:
+#      - POSTGRES_USER=$YOUR_USERNAME
+#      - POSTGRES_PASSWORD=$YOUR_PASSWORD
+#      - POSTGRES_DB=$YOUR_DB_NAME
+#    ports:
+#      - "$LOCAL_PORT:$DOCKER_PORT"

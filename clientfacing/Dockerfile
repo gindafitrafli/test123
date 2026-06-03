@@ -1,0 +1,3 @@
+FROM eclipse-temurin:21
+COPY build/libs/clientfacing-0.0.1-SNAPSHOT.jar clientfacing-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/clientfacing-0.0.1-SNAPSHOT.jar"]

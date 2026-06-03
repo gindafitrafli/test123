@@ -3,3 +3,8 @@
 how to run
 
 ./start
+
+
+how to stop
+
+./stop

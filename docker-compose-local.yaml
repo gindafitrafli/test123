@@ -4,7 +4,6 @@ services:
   client-facing:
     build:
       context: ./clientfacing
-      dockerfile: Dockerfile
     container_name: client-facing
     depends_on:
       - client-facing-db
@@ -20,22 +19,23 @@ services:
     ports:
       - "8080:8080"
 
-#  employee-facing:
-#    build:
-#      context: .
-#    container_name: client-facing
-#    depends_on:
-#      - db
-#    environment:
-#      - POSTGRES_USER=$YOUR_USERNAME
-#      - POSTGRES_PASSWORD=$YOUR_PASSWORD
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/$YOUR_DB_NAME
-#      - SPRING_DATASOURCE_USERNAME=$YOUR_USERNAME
-#      - SPRING_DATASOURCE_PASSWORD=$YOUR_PASSWORD
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-#
-#    ports:
-#      - "$LOCAL_PORT:$DOCKER_PORT"
+  employee-facing:
+    build:
+      context: ./employeefacing
+    container_name: employee-facing
+    depends_on:
+      - employee-facing-db
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_PASSWORD=employee_db_password
+      - SPRING_DATASOURCE_USERNAME=employee_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://employee-facing-db:5433/employee_db
+      - SPRING_DATA_JDBC_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+
+    ports:
+      - "8081:8081"
 
   client-facing-db:
     image: postgres
@@ -47,12 +47,12 @@ services:
     ports:
       - "5432:5432"
 
-#  employee-facing-db:
-#    image: postgres
-#    container_name: employee-facing-db
-#    environment:
-#      - POSTGRES_USER=$YOUR_USERNAME
-#      - POSTGRES_PASSWORD=$YOUR_PASSWORD
-#      - POSTGRES_DB=$YOUR_DB_NAME
-#    ports:
-#      - "$LOCAL_PORT:$DOCKER_PORT"
+  employee-facing-db:
+    image: postgres
+    container_name: employee-facing-db
+    environment:
+      - POSTGRES_USER=employee_db
+      - POSTGRES_PASSWORD=employee_db_password
+      - POSTGRES_DB=employee_db
+    ports:
+      - "5432:5433"

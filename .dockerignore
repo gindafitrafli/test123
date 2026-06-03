@@ -1,5 +1,0 @@
-# Ignore all
-*
-# Only include the following
-!clientfacing/build/libs
-!employeefacing/build/libs

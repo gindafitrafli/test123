@@ -1,5 +1,6 @@
 package com.project.clientfacing.loan;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,16 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/e-banking")
 @Log4j2
+@RequiredArgsConstructor
 public class LoanController {
 
+    LoanService loanService;
+
     @PostMapping("/loan")
-    void submitLoan(SubmitLoanDto submitLoanDto) {
-        log.info("masuk kapten");
+    SubmitLoanDto submitLoan(SubmitLoanDto submitLoanDto) {
+        return loanService.submitLoan(submitLoanDto);
     }
 
     @GetMapping("/loan/{loanId}")
-    Object getLoan(@PathVariable("loanId") String loanId) {
-        log.info("bisa get kapten");
-        return null;
+    SubmitLoanDto getLoan(@PathVariable("loanId") String loanId) {
+
+        return loanService.getLoan(loanId);
     }
 }

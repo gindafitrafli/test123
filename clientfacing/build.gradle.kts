@@ -17,17 +17,27 @@ repositories {
 	mavenCentral()
 }
 
+configurations.all {
+	exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+}
+
 dependencies {
-//	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//	implementation("org.springframework.boot:spring-boot-starter-kafka")
-//	implementation("org.springframework.boot:springD-boot-starter-restclient")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.0.6")
+	implementation("org.springframework.boot:spring-boot-starter-log4j2:4.0.6")
 	implementation("org.springframework.boot:spring-boot-starter-web:4.0.6")
-//	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
-//	testImplementation("org.springframework.boot:spring-boot-starter-kafka-test")
-//	testImplementation("org.springframework.boot:spring-boot-starter-restclient-test")
-//	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
-//	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation("org.springframework.boot:spring-boot-starter:4.0.6")
+	implementation("org.springframework.boot:spring-boot-starter-actuator:4.0.6")
+//	implementation("org.postgresql:com.springsource.org.postgresql.jdbc3:8.3.603")
+	runtimeOnly("org.postgresql:postgresql")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test:4.0.6")
+
+	compileOnly("org.projectlombok:lombok:1.18.34")
+	testCompileOnly("org.projectlombok:lombok:1.18.34")
+
+	// Lombok annotation processor for code generation
+	annotationProcessor("org.projectlombok:lombok:1.18.34")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
 }
 
 tasks.withType<Test> {

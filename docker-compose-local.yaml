@@ -10,12 +10,12 @@ services:
       - client-facing-db
     environment:
       - SERVER_PORT=8080
-#      - POSTGRES_USER=$YOUR_USERNAME
-#      - POSTGRES_PASSWORD=$YOUR_PASSWORD
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/$YOUR_DB_NAME
-#      - SPRING_DATASOURCE_USERNAME=$YOUR_USERNAME
-#      - SPRING_DATASOURCE_PASSWORD=$YOUR_PASSWORD
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_PASSWORD=client_db_password
+      - SPRING_DATASOURCE_USERNAME=client_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://client-facing-db:5432/client_db
+      - SPRING_DATA_JDBC_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
 
     ports:
       - "8080:8080"
@@ -42,7 +42,8 @@ services:
     container_name: client-facing-db
     environment:
       - POSTGRES_USER=client_db
-      - POSTGRES_PASSWORD=client_db
+      - POSTGRES_PASSWORD=client_db_password
+      - POSTGRES_DB=client_db
     ports:
       - "5432:5432"
 

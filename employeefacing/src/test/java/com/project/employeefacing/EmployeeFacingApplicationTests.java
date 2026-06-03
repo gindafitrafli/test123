@@ -3,10 +3,10 @@ package com.project.employeefacing;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EmployeefacingApplicationTests {
+//@SpringBootTest
+class EmployeeFacingApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

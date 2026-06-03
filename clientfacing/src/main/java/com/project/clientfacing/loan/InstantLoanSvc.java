@@ -1,5 +1,6 @@
 package com.project.clientfacing.loan;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ public class InstantLoanSvc implements LoanService {
 
 
     @Override
+    @Transactional
     public SubmitLoanDto submitLoan(SubmitLoanDto submitLoanDto) {
         LoanDetailModel newLoan = new LoanDetailModel();
         newLoan.setLoanAmount(submitLoanDto.loanAmount());
@@ -27,6 +29,9 @@ public class InstantLoanSvc implements LoanService {
         customerDetailModel.setLoanDetail(newLoan);
 
         LoanDetailModel savedLoan = loanDetailRepository.save(newLoan);
+
+        //send the submission to employee facing app to be checked
+
         return SubmitLoanDto.builder()
                 .loanNumber(String.format("%s-%s", savedLoan.getLoanType(), savedLoan.getLoanId()))
                 .build();

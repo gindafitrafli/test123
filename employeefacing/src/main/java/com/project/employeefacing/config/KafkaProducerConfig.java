@@ -21,7 +21,11 @@ public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
+        DefaultKafkaProducerFactory<String, String> pf = new DefaultKafkaProducerFactory<>(producerConfigs());
+
+//        TransactionIdSuffixStrategy ss = new DefaultTransactionIdSuffixStrategy(5);
+//        pf.setTransactionIdSuffixStrategy(ss);
+        return pf;
     }
 
     @Bean
@@ -31,6 +35,10 @@ public class KafkaProducerConfig {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
+
+        //gabutuh min insync replica buat 1 node
+
 
         return props;
     }

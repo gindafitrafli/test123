@@ -1,14 +1,14 @@
 package com.project.clientfacing.loan;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class InstantLoanSvc implements LoanService {
 
-    LoanDetailRepository loanDetailRepository;
+    final LoanDetailRepository loanDetailRepository;
 
 
     @Override
@@ -21,7 +21,7 @@ public class InstantLoanSvc implements LoanService {
         CustomerDetailModel customerDetailModel = new CustomerDetailModel();
         customerDetailModel.setCustomerId(submitLoanDto.customerId());
         customerDetailModel.setName(submitLoanDto.customerName());
-        customerDetailModel.setIdType(submitLoanDto.idType());
+        customerDetailModel.setIdType(submitLoanDto.customerIdType());
         customerDetailModel.setCustomerId(submitLoanDto.customerId());
         customerDetailModel.setContact(submitLoanDto.customerContact());
 

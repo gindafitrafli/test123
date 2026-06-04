@@ -1,15 +1,11 @@
-package com.project.clientfacing.loan;
+package com.project.employeefacing.screening;
 
-import lombok.Builder;
-
-@Builder
-public record SubmitLoanDto(
+public record ScreeningDto(
         String customerName,
         String customerContact,
         String customerId,
         String customerIdType,
         Integer loanAmount,
         String loanType,
-        String loanNumber
-) {
+        String loanNumber) {
 }
